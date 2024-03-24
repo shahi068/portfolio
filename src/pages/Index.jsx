@@ -1,7 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import { Box, Flex, Heading, Text, Image, Button, Link, UnorderedList, ListItem, Divider, IconButton, useColorMode } from "@chakra-ui/react";
-import { FaLinkedin, FaGithub, FaEnvelope, FaMoon, FaSun } from "react-icons/fa";
-import { ColorModeContext } from "../main";
+import { FaLinkedin, FaGithub, FaEnvelope, FaMoon, FaSun, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { ColorModeContext } from '../main';
+
 
 const projects = [
   {
@@ -26,8 +30,41 @@ const projects = [
   },
 ];
 
+const scrollToSection = (sectionId) => {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
+
+
 const Index = () => {
   const { colorMode, toggleColorMode } = useContext(ColorModeContext);
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0); // This line is crucial
+  
+
+  // Ensure this function definition is correct
+  const nextProject = () => {
+    setCurrentProjectIndex((current) => (current + 1) % projects.length);
+  };
+
+  const prevProject = () => {
+    setCurrentProjectIndex((current) => (current - 1 + projects.length) % projects.length);
+  };
+
+  const slickSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    lazyLoad: 'ondemand',
+    swipeToSlide: true,
+    nextArrow: <IconButton aria-label="Next project" icon={<FaArrowRight />} />,
+    prevArrow: <IconButton aria-label="Previous project" icon={<FaArrowLeft />} />,
+  };
+
+  
 
   return (
     <Box bg={colorMode === "light" ? "white" : "gray.800"} color={colorMode === "light" ? "black" : "white"}>
@@ -42,19 +79,11 @@ const Index = () => {
         <Box display={{ base: "block", md: "none" }}>{/* TODO: Add responsive menu */}</Box>
 
         <Box display={{ base: "none", md: "flex" }} width={{ base: "full", md: "auto" }} alignItems="center" flexGrow={1}>
-          <IconButton onClick={toggleColorMode} ml="auto" icon={colorMode === "light" ? <FaMoon /> : <FaSun />} aria-label="Toggle color mode" />
-          <Link href="#about" px={2} py={1}>
-            About
-          </Link>
-          <Link href="#qualifications" px={2} py={1}>
-            Qualifications
-          </Link>
-          <Link href="#projects" px={2} py={1}>
-            Projects
-          </Link>
-          <Link href="#contact" px={2} py={1}>
-            Contact
-          </Link>
+        <IconButton onClick={toggleColorMode} ml="auto" icon={colorMode === "light" ? <FaMoon /> : <FaSun />} aria-label="Toggle color mode" />
+        <Button variant="ghost" onClick={() => scrollToSection('about')} aria-label="Go to About Section">About</Button>
+          <Button variant="ghost" onClick={() => scrollToSection('qualifications')} aria-label="Go to Qualifications Section">Qualifications</Button>
+          <Button variant="ghost" onClick={() => scrollToSection('projects')} aria-label="Go to Projects Section">Projects</Button>
+          <Button variant="ghost" onClick={() => scrollToSection('contact')} aria-label="Go to Contact Section">Contact</Button>
         </Box>
       </Flex>
 
@@ -63,7 +92,7 @@ const Index = () => {
         <Heading as="h2" size="xl" mb={4}>
           Hi, I'm Adam!
         </Heading>
-        <Image src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxlbXBsb3llZSUyMHBvcnRyYWl0fGVufDB8fHx8MTcxMTE0MzU2Mnww&ixlib=rb-4.0.3&q=80&w=1080" alt="Adam Shahin" borderRadius="full" boxSize="200px" objectFit="cover" float="right" ml={4} />
+        <Image src="/IMG_1638.jpg" alt="Adam Shahin" borderRadius="full" boxSize="200px" objectFit="cover" float="right" ml={4} />
         <Text fontSize="xl" mb={4}>
           I'm a Computer Science graduate from the University of Minnesota, Twin Cities, and I call the vibrant Minneapolis area my home. My journey in tech is fueled by a passion for creating innovative solutions and a love for working in fast-paced environments where I can contribute to projects with meaningful outcomes.
         </Text>
@@ -144,27 +173,38 @@ const Index = () => {
 
       <Divider my={8} />
 
-      {/* Projects Section */}
+      {/* Projects Section with Carousel */}
       <Box id="projects" p={4}>
         <Heading as="h2" size="xl" mb={4}>
           Projects
         </Heading>
-        {projects.map((project, index) => (
-          <Box key={index} mb={8}>
+        <Flex direction="column" align="center">
+        
+        <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={5} mb={4}
+     boxShadow="lg" transition="transform 0.3s, box-shadow 0.3s"
+     _hover={{ transform: "translateY(-4px)", boxShadow: "xl" }}>
             <Heading as="h3" size="lg" mb={2}>
-              {project.title}
+              {projects[currentProjectIndex].title}
             </Heading>
-            {Array.isArray(project.description) ? (
+            {Array.isArray(projects[currentProjectIndex].description) ? (
               <UnorderedList>
-                {project.description.map((item, itemIndex) => (
-                  <ListItem key={itemIndex}>{item}</ListItem>
+                {projects[currentProjectIndex].description.map((desc, idx) => (
+                  <ListItem key={idx}>{desc}</ListItem>
                 ))}
               </UnorderedList>
             ) : (
-              <Text fontSize="lg">{project.description}</Text>
+              <Text>{projects[currentProjectIndex].description}</Text>
             )}
           </Box>
-        ))}
+          <Flex gap="4">
+            <Button onClick={prevProject} variant="outline" colorScheme="teal" _hover={{ bg: "teal.600", borderColor: "teal.600" }}>
+              Previous
+            </Button>
+            <Button onClick={nextProject} variant="outline" colorScheme="teal" _hover={{ bg: "teal.600", borderColor: "teal.600" }}>
+              Next
+            </Button>
+          </Flex>
+        </Flex>
       </Box>
 
       <Divider my={8} />
