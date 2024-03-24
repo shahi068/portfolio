@@ -148,10 +148,11 @@ const Index = () => {
           May. 2023 – Aug. 2023
         </Text>
         <UnorderedList mb={4}>
-          <ListItem>Contributed to refining machine learning models for handwritten detection.</ListItem>
-          <ListItem>Improved data processing speed by 25% through optimization techniques.</ListItem>
-          <ListItem>Conducted QA, pinpointing and resolving 20+ software discrepancies, contributing to high-quality solution delivery.</ListItem>
-          <ListItem>Actively participated in bi-weekly code reviews, optimizing code practices.</ListItem>
+          <ListItem>Implemented responsive UIs for web applications, enhancing interactivity and user experience.</ListItem>
+          <ListItem>Boosted data processing speed by 25% through performance optimization techniques.</ListItem>
+          <ListItem>Resolved 20+ software issues during QA, ensuring high-quality solution delivery.</ListItem>
+          <ListItem>Collaborated with teams to turn designs into functional web apps, improving team integration.</ListItem>
+          <ListItem>Applied profiling tools to improve web app performance across devices and browsers.</ListItem>
         </UnorderedList>
 
         <Text fontSize="xl" mb={2}>
