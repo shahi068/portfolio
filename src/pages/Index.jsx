@@ -159,7 +159,6 @@ const Index = () => {
 
 
           
-        </Heading>
         <Text fontSize="xl" mb={2}>
           Software Developer Intern
         </Text>
