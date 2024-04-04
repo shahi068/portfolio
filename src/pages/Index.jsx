@@ -146,7 +146,7 @@ const Index = () => {
           Minnesota IT Services, Saint Paul, MN
         </Text>
         <Text fontSize="lg" mb={4}>
-          May. 2023 – Aug. 2023
+          May. 2023 – Present
         </Text>
         <UnorderedList mb={4}>
           <ListItem>Analyzed, designed, and developed technical solutions in collaboration with project managers and IT resources, using Azure Dev Ops and Visual Studio for software management and work item management.</ListItem>
