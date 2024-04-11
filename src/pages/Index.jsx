@@ -118,7 +118,7 @@ const Index = () => {
           Sept. 2020 - Dec. 2023
         </Text>
         <Text fontSize="lg" mb={2}>
-          Bachelor of Arts, Computer Science
+          Bachelor of Science, Computer Science
         </Text>
         <Text fontSize="lg" mb={4}>
           Relevant Coursework:
