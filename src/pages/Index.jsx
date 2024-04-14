@@ -139,21 +139,7 @@ const Index = () => {
           Experience
 
         </Heading>
-      // <Text fontSize="xl" mb={2}>
-          //Software Developer
-        //</Text>
-       // <Text fontSize="lg" mb={2}>
-         // Minnesota IT Services, Saint Paul, MN
-      //  </Text>
-      //  <Text fontSize="lg" mb={4}>
-        //  May. 2023 – Present
-      //  </Text>
-      //  <UnorderedList mb={4}>
-      //    <ListItem>Analyzed, designed, and developed technical solutions in collaboration with project managers and IT resources, using Azure Dev Ops and Visual Studio for software management and work item management.</ListItem>
-     //     <ListItem>Contributed to the full Software Development Life Cycle (SDLC) of IT applications, emphasizing service-oriented design and development with .NET Core, C\#, and ASP.NET MVC.</ListItem>
-     //     <ListItem>Led maintenance of IT applications, demonstrating leadership and enhancing functionality and availability under the sprint team leader’s guidance.</ListItem>
-      //    <ListItem>Designed and implemented automated testing within CI/CD pipelines using Visual Studio, improving code quality and deployment reliability.</ListItem>
-      //  </UnorderedList>
+      
 
       
 
